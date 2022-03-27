@@ -1,10 +1,11 @@
-from main import Session, Store_Database
+from model import Session, User
 from db_engine import engine
 
 local_session = Session(bind=engine)
 
-user_to_delete = local_session.query(Store_Database).filter(Store_Database.id==3).first()
-
-#for user_to_delete in users_to_delete:
-local_session.delete(user_to_delete)
-local_session.commit()
+class DeleteUser:
+    def __init__(self):
+        user_id = int(input("Type in the id of the user to delete: "))
+        user_to_delete = local_session.query(User).filter(User.id==user_id).first()
+        local_session.delete(user_to_delete)
+        local_session.commit()

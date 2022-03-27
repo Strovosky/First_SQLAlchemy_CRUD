@@ -1,14 +1,23 @@
-from main import Session, Store_Database
+from model import Session, User
 from db_engine import engine
 
 #First, let's bind the session to the engine.
 local_session = Session(bind=engine)
 
-# Then, let's get the info into a list of objects (or object of objects, I'm not sure)
-users = local_session.query(Store_Database).all()
+class GetUsers:
+    def get_all_users(self):
+        users = local_session.query(User).all()
+        for user in users:
+            print(user)
+    
+    def get_user(self):
+        user_id = int(input("Type in the user's id: "))
+        try:
+            user = local_session.query(User).filter(User.id==user_id).first()
+            print(user)
+        except:
+            print("This user does not exist.")
 
-for user in users:
-    print(user)
 
 #If I wanted a specific user I would go like this:
 #user = local_session.query(Store_Database).fileter(Store_Database.id==2).first()

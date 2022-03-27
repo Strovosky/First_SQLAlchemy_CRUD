@@ -1,4 +1,4 @@
-from main import Session, Store_Database
+from model import Session, Store_Database
 from db_engine import engine
 from sqlalchemy import desc #I import this one if I wanna order the info in descending order.
 

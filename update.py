@@ -1,17 +1,12 @@
-from main import Session, Store_Database
+from model import Session, User
 from db_engine import engine
 
 local_session = Session(bind=engine)
 
-#First, I should get the user, I will get it in an object that references the location on the database.
-user_to_update = local_session.query(Store_Database).filter(Store_Database.id == 3).first()
-
-#Then, I update the info in the object, which will also update the info in the database, becase the
-# object references that location.
-user_to_update.username = "Lalo"
-user_to_update.email = "viajante@aol.com"
-user_to_update.id = 3
-
-#I commit the changes.
-local_session.commit()
-
+class UpdarteUser:
+    def __init__(self):
+        user_id = int(input("Type in the id of the user you wanna update: "))
+        user = local_session.query(User).filter(User.id==user_id).first()
+        user.username = input("Name of the user: ")
+        user.email = input("Email of the user: ")
+        local_session.commit()

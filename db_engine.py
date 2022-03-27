@@ -2,7 +2,7 @@
 
 from sqlalchemy import create_engine
 
-from main import Base
+from model import Base
 
 engine = create_engine("mysql+pymysql://root@localhost:3306/db_test")
 
